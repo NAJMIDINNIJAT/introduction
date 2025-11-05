@@ -1,16 +1,162 @@
-<!DOCTYPE html>
-<html>
-    <head>
-<meta charset="UTF-8">
-    <title>奈基嘧啶</title>
-    <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-<h1>奈基嘧啶</h1>
-<div  class="normal">耐饥饿嘧啶（Nicotinamide）是一种水溶性维生素，属于维生素B族。它在人体内起着重要的作用，参与多种生物化学<p id="text">维生素<i>vitami</i></p></div>
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>肺炎球菌和绿脓菌跳舞</title>
+    <style>
+        :root{
+            --bg1: #0f172a;
+            --bg2: #0b1220;
+            --accent: #7ee3a8;
+            --accent2: #7fb7ff;
+            --stage: #081025;
+        }
+        html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial; background: radial-gradient(1200px 600px at 10% 10%, rgba(126,227,168,0.06), transparent), radial-gradient(900px 400px at 90% 85%, rgba(127,183,255,0.04), transparent), linear-gradient(180deg,var(--bg1),var(--bg2)); color:#e6eef8;}
+        .wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px;box-sizing:border-box;}
+        h1{margin:0 0 18px 0;font-weight:600;letter-spacing:0.6px;font-size:20px;color:#cfeffd;text-shadow:0 2px 8px rgba(0,0,0,0.6);}
 
-<img src="flowchart.png" alt="Flowchart of Systematic Review and Meta-analysis">
-    </body>
-</html>
-        
-    
+        .stage{
+            width:720px; max-width:92vw; height:360px; border-radius:18px; background:
+            linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+            box-shadow: 0 8px 40px rgba(2,6,23,0.7), inset 0 1px 0 rgba(255,255,255,0.02);
+            position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center;
+            border:1px solid rgba(255,255,255,0.03);
+        }
+
+        /* disco lights */
+        .stage::before{
+            content:""; position:absolute; inset:0; background:
+            radial-gradient(200px 120px at 10% 10%, rgba(127,183,255,0.12), transparent 12%),
+            radial-gradient(160px 80px at 90% 80%, rgba(126,227,168,0.08), transparent 12%);
+            pointer-events:none; mix-blend-mode:screen;
+        }
+
+        .floor{
+            position:absolute; left:0; right:0; bottom:18px; height:120px; background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+            transform:skewY(-3deg); filter:blur(6px); opacity:0.7;
+        }
+
+        /* bacteria group positioning */
+        .pair{position:relative; width:560px; max-width:86%; height:220px; display:flex; align-items:center; justify-content:space-between; padding:20px; box-sizing:border-box;}
+
+        /* common features */
+        .bacteria{width:180px; height:140px; display:flex; align-items:center; justify-content:center; position:relative; transform-origin:center bottom;}
+
+        .label{position:absolute; bottom:-28px; left:50%; transform:translateX(-50%); font-size:14px; color:#dff7ff; opacity:0.9; text-shadow:0 1px 0 rgba(0,0,0,0.6);}
+
+        /* Pneumococcus - spherical */
+        .coccus{
+            width:120px; height:120px; border-radius:50%; background: radial-gradient(circle at 35% 30%, #fff8, rgba(255,255,255,0.06) 5%, #7ee3a880 25%, #1f7a58);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.5), inset -8px -8px 24px rgba(0,0,0,0.25);
+            display:flex; flex-direction:column; align-items:center; justify-content:center;
+            animation: bounce 1.6s ease-in-out infinite, sway 4.2s ease-in-out infinite;
+        }
+        .coccus .face{width:76px; height:48px; display:flex; align-items:center; justify-content:space-evenly;}
+        .eye{
+            width:14px; height:14px; background:#fff; border-radius:50%; position:relative;
+            box-shadow: inset -2px -2px 0 rgba(0,0,0,0.12);
+        }
+        .eye::after{content:""; position:absolute; top:3px; left:3px; width:6px; height:6px; background:#153; border-radius:50%;}
+        .smile{width:40px; height:6px; border-radius:6px; background:transparent; border-bottom:3px solid rgba(255,255,255,0.7); transform:translateY(6px);}
+
+        /* Pseudomonas - rod shaped with flagella-like tails */
+        .rod{
+            width:180px; height:72px; border-radius:40px; background: linear-gradient(90deg,#143e57 0%, #1b6ba8 60%, #7fb7ff 100%);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.5), inset -8px -8px 20px rgba(0,0,0,0.25);
+            position:relative; display:flex; align-items:center; justify-content:flex-start; padding-left:22px;
+            transform-origin:center bottom;
+            animation: wiggle 1.5s ease-in-out infinite, bob 2.4s ease-in-out infinite;
+        }
+        .rod::before{
+            content:""; position:absolute; right: -22px; top:50%; transform:translateY(-50%) rotate(18deg); width:80px; height:6px; background:radial-gradient(circle,#7fb7ff 0%, #4d9ad6 50%); border-radius:6px; opacity:0.8;
+            filter:blur(1px);
+            animation: tail 1.2s linear infinite;
+        }
+        .rod .eyes{display:flex; gap:8px; align-items:center;}
+        .rod .eye{width:12px;height:12px;background:#fff;border-radius:50%;}
+        .rod .eye::after{content:""; position:absolute; width:5px;height:5px;background:#06324a;border-radius:50%; top:3px; left:3px; position:relative;}
+
+        /* movement choreography */
+        .pair{animation: converge 6s ease-in-out infinite;}
+
+        @keyframes bounce{
+            0%,100%{transform:translateY(0) scale(1);}
+            50%{transform:translateY(-10px) scale(1.03);}
+        }
+        @keyframes sway{
+            0%,100%{transform:rotate(-6deg);}
+            50%{transform:rotate(6deg);}
+        }
+        @keyframes wiggle{
+            0%{transform:rotate(6deg) translateY(0);}
+            25%{transform:rotate(-6deg) translateY(-6px);}
+            50%{transform:rotate(6deg) translateY(0);}
+            75%{transform:rotate(-4deg) translateY(-4px);}
+            100%{transform:rotate(6deg) translateY(0);}
+        }
+        @keyframes bob{
+            0%,100%{transform:translateY(0);}
+            50%{transform:translateY(-8px);}
+        }
+        @keyframes tail{
+            0%{transform:translateY(-50%) rotate(18deg) translateX(0);}
+            50%{transform:translateY(-50%) rotate(36deg) translateX(6px);}
+            100%{transform:translateY(-50%) rotate(18deg) translateX(0);}
+        }
+        @keyframes converge{
+            0%{transform:translateX(0);}
+            10%{transform:translateX(0);}
+            40%{transform:translateX(-14px);}
+            60%{transform:translateX(14px);}
+            90%{transform:translateX(0);}
+            100%{transform:translateX(0);}
+        }
+
+        /* spotlight pulses */
+        .spot{position:absolute; width:160px; height:160px; left:50%; top:18px; transform:translateX(-50%); border-radius:50%; pointer-events:none; mix-blend-mode:screen; opacity:0.18;
+            background:radial-gradient(circle at 30% 30%, rgba(127,183,255,0.5), transparent 40%), radial-gradient(circle at 70% 70%, rgba(126,227,168,0.45), transparent 35%);
+            filter:blur(12px); animation: pulse 6s ease-in-out infinite;
+        }
+        @keyframes pulse{
+            0%{opacity:0.14; transform:translateX(-50%) scale(0.96);}
+            50%{opacity:0.26; transform:translateX(-50%) scale(1.06);}
+            100%{opacity:0.14; transform:translateX(-50%) scale(0.96);}
+        }
+
+        /* responsiveness */
+        @media (max-width:560px){
+            .pair{flex-direction:column; gap:18px; height:auto;}
+            .label{bottom:-22px;}
+            .stage{height:480px;}
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <h1>肺炎球菌和绿脓菌跳舞</h1>
+        <div class="stage" role="img" aria-label="两种拟人化的细菌在舞台上跳舞的动画">
+            <div class="spot" aria-hidden="true"></div>
+            <div class="pair" aria-hidden="false">
+                <div class="bacteria coccus" title="肺炎球菌">
+                    <div class="face" aria-hidden="true">
+                        <div class="eye"></div>
+                        <div class="eye"></div>
+                    </div>
+                    <div class="smile" aria-hidden="true"></div>
+                    <div class="label">肺炎球菌</div>
+                </div>
+
+                <div class="bacteria rod" title="绿脓菌">
+                    <div class="eyes" aria-hidden="true" style="display:flex; gap:8px;">
+                        <div class="eye" style="position:relative;"></div>
+                        <div class="eye" style="position:relative;"></div>
+                    </div>
+                    <div class="label">绿脓菌</div>
+                </div>
+            </div>
+            <div class="floor" aria-hidden="true"></div>
+        </div>
+    </div>
+</body>
+</html></div>
